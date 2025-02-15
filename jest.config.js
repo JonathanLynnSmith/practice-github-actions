@@ -1,3 +1,4 @@
 module.exports = {
-    testEnvironment: "node",
-};
+    testMatch: ["<rootDir>/tests/**/*.[jt]s?(x)"]
+  };
+  
