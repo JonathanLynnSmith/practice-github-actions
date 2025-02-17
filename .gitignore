@@ -1,1 +1,40 @@
-node_modules/
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+.pytest_cache
+
+# Virtual environment folders (adjust to your environment if necessary)
+.venv/
+venv/
+.env/
+*.env
+
+# IDE/editor specific files
+.vscode/
+.idea/
+
+# Python distributions
+build/
+dist/
+*.egg-info/
+
+# Test and coverage files
+.coverage
+*.coveragerc
+nosetests.xml
+coverage.xml
+*.hypothesis/
+
+# Log files
+*.log
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# FastAPI specific
+*.sqlite3
