@@ -1,4 +1,5 @@
 import re
+import subprocess
 import sys
 
 def validate_commit_message(msg):
@@ -16,16 +17,13 @@ def validate_commit_message(msg):
         return False, "Missing type"
     
     # Check for the presence of a scope in parentheses
-    # We expect something like: feat(scope)
     if '(' in type_scope:
         if ')' not in type_scope:
             return False, "Invalid format (unclosed parentheses)"
-        # Extract content inside parentheses
         scope_content = type_scope[type_scope.find("(")+1:type_scope.find(")")]
         if not scope_content:
             return False, "Missing scope"
     else:
-        # If no parentheses at all, then scope is missing
         return False, "Missing scope"
     
     # Check if the message after the colon is long enough
@@ -34,3 +32,19 @@ def validate_commit_message(msg):
         return False, "Too short message"
     
     return True, ""
+
+def get_commit_messages():
+    try:
+        # Run git log to get all commit messages
+        result = subprocess.run(
+            ["git", "log", "--pretty=format:%s"],  # Get the commit messages
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        # Split the output into a list of commit messages
+        commit_messages = result.stdout.splitlines()
+        return commit_messages
+    except subprocess.CalledProcessError as e:
+        print(f"Error getting commit messages: {e}")
+        sys.exit(1)
