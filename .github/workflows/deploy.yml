@@ -1,4 +1,4 @@
-name: Deploy on Pull Request to Main
+name: Deploy Workflow
 
 on:
   pull_request:
