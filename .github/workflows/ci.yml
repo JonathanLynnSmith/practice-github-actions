@@ -1,0 +1,29 @@
+name: Commit Linter and Tests
+
+on:
+  push:
+    branches:
+      - main
+       
+jobs:
+  lint-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: |
+          cd src
+          python -m unittest discover -p "test_*.py"
+
+      - name: Print test completion message
+        run: echo "Tests completed successfully"
